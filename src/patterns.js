@@ -20,6 +20,8 @@ export const VIDEO_EXTENSIONS = /\.(mp4|og[gv]|webm|mov|m4v)(#t=[,\d+]+)?($|\?)/
 export const HLS_EXTENSIONS = /\.(m3u8)($|\?)/i
 export const DASH_EXTENSIONS = /\.(mpd)($|\?)/i
 export const FLV_EXTENSIONS = /\.(flv)($|\?)/i
+export const MEDIA_PROTOCOLS = /^rtsp:\/\//i
+
 
 const canPlayFile = url => {
   if (url instanceof Array) {
@@ -37,6 +39,7 @@ const canPlayFile = url => {
     return true
   }
   return (
+    MEDIA_PROTOCOLS.test(url) ||
     AUDIO_EXTENSIONS.test(url) ||
     VIDEO_EXTENSIONS.test(url) ||
     HLS_EXTENSIONS.test(url) ||
